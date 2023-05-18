@@ -1,6 +1,10 @@
 package binarytrees
 
-import "testing"
+import (
+	"testing"
+
+	"github.com/src2crs/algovis/graphdrawing"
+)
 
 // TestNode_EdgeInfo_source_empty_target_nil
 // Creates an empty root node.
@@ -25,15 +29,14 @@ func TestNode_EdgeInfo_source_empty_target_nil(t *testing.T) {
 // - Visible: false
 func TestNode_EdgeInfo_source_empty_target_empty(t *testing.T) {
 	root := NewRootNode()
-	info := root.EdgeInfo(root)
-	if info.Source != "root" {
-		t.Errorf("root.EdgeInfo().Source is %s, but expected %s", info.Source, "root")
+	actualinfo := root.EdgeInfo(root)
+	expectedinfo := graphdrawing.EdgeInfo{
+		Source:  "root",
+		Target:  "root",
+		Visible: false,
 	}
-	if info.Target != "root" {
-		t.Errorf("root.EdgeInfo().Target is %s, but expected %s", info.Target, "root")
-	}
-	if info.Visible {
-		t.Errorf("root.EdgeInfo().Visible is %t, but expected %t", info.Visible, false)
+	if actualinfo != expectedinfo {
+		t.Errorf("root.EdgeInfo() is %#v, but expected %#v", actualinfo, expectedinfo)
 	}
 }
 
@@ -48,15 +51,14 @@ func TestNode_EdgeInfo_source_empty_target_empty(t *testing.T) {
 func TestNode_EdgeInfo_source_nonempty_target_empty(t *testing.T) {
 	root := NewRootNode()
 	root.CreateChild("L")
-	info := root.EdgeInfo(root.Left)
-	if info.Source != "root" {
-		t.Errorf("root.EdgeInfo().Source is %s, but expected %s", info.Source, "root")
+	actualinfo := root.EdgeInfo(root.Left)
+	expectedinfo := graphdrawing.EdgeInfo{
+		Source:  "root",
+		Target:  "L",
+		Visible: false,
 	}
-	if info.Target != "L" {
-		t.Errorf("root.EdgeInfo().Target is %s, but expected %s", info.Target, "L")
-	}
-	if info.Visible {
-		t.Errorf("root.EdgeInfo().Visible is %t, but expected %t", info.Visible, false)
+	if actualinfo != expectedinfo {
+		t.Errorf("root.EdgeInfo() is %#v, but expected %#v", actualinfo, expectedinfo)
 	}
 }
 
@@ -73,15 +75,14 @@ func TestNode_EdgeInfo_source_nonempty_target_nonempty(t *testing.T) {
 	root := NewRootNode()
 	root.CreateChild("L")
 	root.Left.CreateChild("L")
-	info := root.EdgeInfo(root.Left)
-	if info.Source != "root" {
-		t.Errorf("root.EdgeInfo().Source is %s, but expected %s", info.Source, "root")
+	actualinfo := root.EdgeInfo(root.Left)
+	expectedinfo := graphdrawing.EdgeInfo{
+		Source:  "root",
+		Target:  "L",
+		Visible: true,
 	}
-	if info.Target != "L" {
-		t.Errorf("root.EdgeInfo().Target is %s, but expected %s", info.Target, "L")
-	}
-	if !info.Visible {
-		t.Errorf("root.EdgeInfo().Visible is %t, but expected %t", info.Visible, true)
+	if actualinfo != expectedinfo {
+		t.Errorf("root.EdgeInfo() is %#v, but expected %#v", actualinfo, expectedinfo)
 	}
 }
 
@@ -96,14 +97,13 @@ func TestNode_EdgeInfo_source_nonempty_target_nonempty(t *testing.T) {
 func TestNode_EdgeInfo_source_empty_target_nonempty(t *testing.T) {
 	root := NewRootNode()
 	root.CreateChild("L")
-	info := root.Left.EdgeInfo(root)
-	if info.Source != "L" {
-		t.Errorf("root.Left.EdgeInfo().Source is %s, but expected %s", info.Source, "L")
+	actualinfo := root.Left.EdgeInfo(root)
+	expectedinfo := graphdrawing.EdgeInfo{
+		Source:  "L",
+		Target:  "root",
+		Visible: false,
 	}
-	if info.Target != "root" {
-		t.Errorf("root.Left.EdgeInfo().Target is %s, but expected %s", info.Target, "root")
-	}
-	if info.Visible {
-		t.Errorf("root.Left.EdgeInfo().Visible is %t, but expected %t", info.Visible, false)
+	if actualinfo != expectedinfo {
+		t.Errorf("root.Left.EdgeInfo() is %#v, but expected %#v", actualinfo, expectedinfo)
 	}
 }
