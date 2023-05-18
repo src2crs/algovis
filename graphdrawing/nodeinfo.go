@@ -1,4 +1,4 @@
-package binarytrees
+package graphdrawing
 
 // NodeInfo contains information for drawing a node of a binary tree.
 type NodeInfo struct {

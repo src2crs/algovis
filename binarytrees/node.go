@@ -1,5 +1,7 @@
 package binarytrees
 
+import "github.com/src2crs/algovis/graphdrawing"
+
 // Node is a node in a binary tree.
 // Each node has a path string, which is used to identify the node's position in the tree.
 // The path string is a sequence of characters 'L' or 'R', where each character represents a direction in the tree.
@@ -84,8 +86,8 @@ func (n *Node) Name() string {
 }
 
 // NodeInfo returns information for drawing the current node.
-func (n *Node) NodeInfo() NodeInfo {
-	return NodeInfo{
+func (n *Node) NodeInfo() graphdrawing.NodeInfo {
+	return graphdrawing.NodeInfo{
 		Name:    n.Name(),
 		Label:   n.Label(),
 		Visible: !n.IsEmpty(),
