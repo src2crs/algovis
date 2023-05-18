@@ -82,3 +82,12 @@ func (n *Node) Name() string {
 	}
 	return n.Path
 }
+
+// NodeInfo returns information for drawing the current node.
+func (n *Node) NodeInfo() NodeInfo {
+	return NodeInfo{
+		Name:    n.Name(),
+		Label:   n.Label(),
+		Visible: !n.IsEmpty(),
+	}
+}
