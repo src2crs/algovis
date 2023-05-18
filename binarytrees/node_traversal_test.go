@@ -2,10 +2,10 @@ package binarytrees
 
 import "testing"
 
-// TestNode_Traverse_complete tests the Node.Traverse() method.
+// TestNode_Visit_complete tests the Node.Visit() method.
 // It uses a traversal function that appends each node to a slice.
 // Then it checks if the slice contains the expected nodes in the expected order.
-func TestNode_Traverse_complete(t *testing.T) {
+func TestNode_Visit_complete(t *testing.T) {
 	// Create a binary tree with the following structure:
 	//   root
 	//   ├── L
@@ -41,7 +41,7 @@ func TestNode_Traverse_complete(t *testing.T) {
 	}
 
 	// Traverse the tree.
-	root.Traverse(traversalFunc)
+	root.Visit(traversalFunc)
 
 	// Check result.
 	ok := true
@@ -72,10 +72,10 @@ func TestNode_Traverse_complete(t *testing.T) {
 	}
 }
 
-// TestNode_Traverse_incomplete tests the Node.Traverse() method.
+// TestNode_Visit_incomplete tests the Node.Visit() method.
 // It uses a traversal function that appends only the first two nodes to a slice.
 // Then it checks if the slice contains the first two nodes in the expected order.
-func TestNode_Traverse_incomplete(t *testing.T) {
+func TestNode_Visit_incomplete(t *testing.T) {
 	// Create a binary tree with the following structure:
 	//   root
 	//   ├── L
@@ -114,7 +114,7 @@ func TestNode_Traverse_incomplete(t *testing.T) {
 	}
 
 	// Traverse the tree.
-	root.Traverse(traversalFunc)
+	root.Visit(traversalFunc)
 
 	// Check result.
 	ok := true

@@ -108,18 +108,18 @@ func (n *Node) EdgeInfo(target *Node) graphdrawing.EdgeInfo {
 	}
 }
 
-// Traverse traverses the tree in pre-order and calls the given function for each node.
+// Visit traverses the tree in pre-order and calls the given function for each node.
 // The given function is called with the current node as argument.
 // If the given function returns false, the traversal is aborted.
 // Returns true if the complete tree was traversed, false otherwise.
-func (n *Node) Traverse(f func(*Node) bool) bool {
+func (n *Node) Visit(f func(*Node) bool) bool {
 	if !f(n) {
 		return false
 	}
-	if n.Left != nil && !n.Left.Traverse(f) {
+	if n.Left != nil && !n.Left.Visit(f) {
 		return false
 	}
-	if n.Right != nil && !n.Right.Traverse(f) {
+	if n.Right != nil && !n.Right.Visit(f) {
 		return false
 	}
 	return true
