@@ -87,3 +87,24 @@ func TestNode_GetChild_InvalidDirection(t *testing.T) {
 	e := NewRootNode()
 	e.GetChild("X")
 }
+
+// TestNode_NewNode_IsEmpty tests whether a newly created node is empty.
+func TestNode_NewNode_IsEmpty(t *testing.T) {
+	e := NewNode("LLR")
+	if !e.IsEmpty() {
+		t.Errorf("NewNode() is not empty")
+	}
+}
+
+// TestNode_CreateChild_IsEmpty tests whether a after creating a new node,
+// the parent node is not empty anymore, but the child node is empty.
+func TestNode_CreateChild_IsEmpty(t *testing.T) {
+	e := NewRootNode()
+	e.CreateChild("L")
+	if e.IsEmpty() {
+		t.Errorf("CreateChild() did not make parent node non-empty")
+	}
+	if !e.Left.IsEmpty() {
+		t.Errorf("CreateChild() did not make child node empty")
+	}
+}

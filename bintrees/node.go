@@ -51,3 +51,9 @@ func (n *Node) GetChild(direction string) *Node {
 		panic("Invalid direction")
 	}
 }
+
+// IsEmpty returns true if the current node is empty.
+// A node is empty if it has no children.
+func (n *Node) IsEmpty() bool {
+	return n.Left == nil && n.Right == nil
+}
