@@ -97,11 +97,11 @@ func (n *Node) NodeInfo() graphdrawing.NodeInfo {
 // EdgeInfo returns information for drawing an edge from the current node to the given target node.
 // The target node must not be nil.
 // If the current node or the target node is empty, the edge is not visible.
-func (n *Node) EdgeInfo(target *Node) EdgeInfo {
+func (n *Node) EdgeInfo(target *Node) graphdrawing.EdgeInfo {
 	if target == nil {
 		panic("Target node must not be nil")
 	}
-	return EdgeInfo{
+	return graphdrawing.EdgeInfo{
 		Source:  n.Name(),
 		Target:  target.Name(),
 		Visible: !n.IsEmpty() && !target.IsEmpty(),
