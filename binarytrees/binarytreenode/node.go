@@ -23,32 +23,32 @@ func NewRootNode() *Node {
 	return NewNode("")
 }
 
-// CreateChild creates a new child node of the current node.
-// The new node is created on the left or right side of the current node, depending on the given direction.
+// CreateChildrenIfEmpty tries to create two new empty child nodes of the current node.
+// If the current node is empty, the function creates both left and right child nodes.
+// If the current node is not empty, the function has no effect.
+func (n *Node) CreateChildrenIfEmpty() {
+	if !n.IsEmpty() {
+		return
+	}
+	n.Left = NewNode(n.Path + "L")
+	n.Right = NewNode(n.Path + "R")
+}
+
+// CreateChild creates two new empty child nodes if the current node is empty.
+// The new node specified by direction is returned.
+// If the current node is not empty, the function has no effect.
 // The path string of the new node is the path string of the current node, with the given direction appended.
-// The new node is returned.
 // If the given direction is neither "L" nor "R", a panic occurs.
-// If a node already exists on the given side, it is overwritten.
 func (n *Node) CreateChild(direction string) *Node {
 	if direction != "L" && direction != "R" {
 		panic("Invalid direction")
 	}
-
-	result := NewNode(n.Path + direction)
-
-	switch direction {
-	case "L":
-		n.Left = result
-		if n.Right == nil {
-			n.Right = NewNode(n.Path + "R")
-		}
-	case "R":
-		n.Right = result
-		if n.Left == nil {
-			n.Left = NewNode(n.Path + "L")
-		}
+	n.CreateChildrenIfEmpty()
+	if direction == "L" {
+		return n.Left
+	} else {
+		return n.Right
 	}
-	return result
 }
 
 // CreateNodeAtSubPos creates a new node below the current node.
@@ -66,7 +66,7 @@ func (n *Node) CreateNodeAtSubPos(path string) *Node {
 	switch nextdir {
 	case "L":
 		if n.Left == nil {
-			n.Left = NewNode(n.Path + nextdir)
+			n.CreateChild(nextdir)
 		}
 		return n.Left.CreateNodeAtSubPos(rest)
 	case "R":

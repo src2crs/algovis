@@ -31,13 +31,16 @@ func TestNode_CreateChild_InvalidDirection(t *testing.T) {
 	e.CreateChild("X")
 }
 
-// TestNode_CreateChild_Overwrite tests whether a child node is overwritten when a child node already exists on the given side.
-func TestNode_CreateChild_Overwrite(t *testing.T) {
-	e := NewRootNode()
-	e.CreateChild("L")
-	c := e.CreateChild("L")
-	if e.Left != c {
-		t.Errorf("CreateChild() did not overwrite existing child node")
+// TestNode_CreateChild creates two child nodes and tests whether both are the root's left child.
+func TestNode_CreateChild_overwrite_nonempty_panic(t *testing.T) {
+	root := NewRootNode()
+	l1 := root.CreateChild("L")
+	if l1 != root.Left {
+		t.Errorf("CreateChild() did not create node at correct position")
+	}
+	l2 := root.CreateChild("L")
+	if l1 != l2 {
+		t.Errorf("CreateChild() did not return the same node when creating the same non-empty child twice")
 	}
 }
 
