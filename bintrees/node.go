@@ -37,3 +37,17 @@ func (n *Node) CreateChild(direction string) *Node {
 		panic("Invalid direction")
 	}
 }
+
+// GetChild returns the child node of the current node on the given side.
+// If no node exists on the given side, nil is returned.
+// If the given direction is neither "L" nor "R", a panic occurs.
+func (n *Node) GetChild(direction string) *Node {
+	switch direction {
+	case "L":
+		return n.Left
+	case "R":
+		return n.Right
+	default:
+		panic("Invalid direction")
+	}
+}
