@@ -91,3 +91,17 @@ func (n *Node) NodeInfo() NodeInfo {
 		Visible: !n.IsEmpty(),
 	}
 }
+
+// EdgeInfo returns information for drawing an edge from the current node to the given target node.
+// The target node must not be nil.
+// If the current node or the target node is empty, the edge is not visible.
+func (n *Node) EdgeInfo(target *Node) EdgeInfo {
+	if target == nil {
+		panic("Target node must not be nil")
+	}
+	return EdgeInfo{
+		Source:  n.Name(),
+		Target:  target.Name(),
+		Visible: !n.IsEmpty() && !target.IsEmpty(),
+	}
+}
