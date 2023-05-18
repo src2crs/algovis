@@ -108,3 +108,32 @@ func TestNode_CreateChild_IsEmpty(t *testing.T) {
 		t.Errorf("CreateChild() did not make child node empty")
 	}
 }
+
+// TestNode_Label_root checks the label of a root node.
+// If no label is set, the empty string is expected.
+// If a label is set, the label is expected.
+func TestNode_Label_root(t *testing.T) {
+	root := NewRootNode()
+	if root.Label() != "" {
+		t.Errorf("root.Label() returned %s, but expected empty string", root.Label())
+	}
+	root.SetLabel("foo")
+	if root.Label() != "foo" {
+		t.Errorf("root.Label() returned %s, but expected %s", root.Label(), "foo")
+	}
+}
+
+// TestNode_Label_nonroot checks the label of a non-root node.
+// If no label is set, the path string is expected.
+// If a label is set, the label is expected.
+func TestNode_Label_nonroot(t *testing.T) {
+	root := NewRootNode()
+	l := root.CreateChild("L")
+	if l.Label() != "L" {
+		t.Errorf("l.Label() returned %s, but expected %s", l.Label(), "L")
+	}
+	l.SetLabel("foo")
+	if l.Label() != "foo" {
+		t.Errorf("l.Label() returned %s, but expected %s", l.Label(), "foo")
+	}
+}

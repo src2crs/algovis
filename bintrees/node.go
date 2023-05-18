@@ -6,6 +6,7 @@ package bintrees
 // The path string is empty for the root node.
 type Node struct {
 	Path  string // Stores the position of the node in the tree.
+	label string // Label to be used when drawing the node. If empty, the path string is used instead.
 	Left  *Node  // Left child node.
 	Right *Node  // Right child node.
 }
@@ -56,4 +57,18 @@ func (n *Node) GetChild(direction string) *Node {
 // A node is empty if it has no children.
 func (n *Node) IsEmpty() bool {
 	return n.Left == nil && n.Right == nil
+}
+
+// Label returns the label of the current node for drawing.
+// If the label is empty, the path string is returned instead.
+func (n *Node) Label() string {
+	if n.label != "" {
+		return n.label
+	}
+	return n.Path
+}
+
+// SetLabel sets the label of the current node for drawing.
+func (n *Node) SetLabel(label string) {
+	n.label = label
 }
