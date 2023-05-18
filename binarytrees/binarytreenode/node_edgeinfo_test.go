@@ -1,4 +1,4 @@
-package binarytrees
+package binarytreenode
 
 import (
 	"testing"

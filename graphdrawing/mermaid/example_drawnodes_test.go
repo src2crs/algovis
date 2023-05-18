@@ -3,7 +3,7 @@ package mermaid
 import (
 	"fmt"
 
-	"github.com/src2crs/algovis/binarytrees"
+	"github.com/src2crs/algovis/binarytrees/binarytreenode"
 )
 
 // ExampleDrawNode_binarytree creates a binary tree with several nodes
@@ -22,7 +22,7 @@ func ExampleDrawNode_binarytree() {
 	//       └── RL (invisible)
 	//       └── RR (invisible)
 	//
-	root := binarytrees.NewRootNode()
+	root := binarytreenode.NewRootNode()
 	l := root.CreateChild("L")
 	ll := l.CreateChild("L")
 	lll := ll.CreateChild("L")
@@ -35,7 +35,7 @@ func ExampleDrawNode_binarytree() {
 	rr := r.CreateChild("R")
 
 	// Print the mermaid representation of each node.
-	for _, node := range []*binarytrees.Node{root, l, ll, lll, llr, lr, lrl, lrr, r, rl, rr} {
+	for _, node := range []*binarytreenode.Node{root, l, ll, lll, llr, lr, lrl, lrr, r, rl, rr} {
 		fmt.Println(DrawNode(node.NodeInfo()))
 	}
 

@@ -3,7 +3,7 @@ package mermaid
 import (
 	"fmt"
 
-	"github.com/src2crs/algovis/binarytrees"
+	"github.com/src2crs/algovis/binarytrees/binarytreenode"
 )
 
 func ExampleDrawBinaryTree() {
@@ -20,7 +20,7 @@ func ExampleDrawBinaryTree() {
 	//       └── RL
 	//       └── RR
 	//
-	root := binarytrees.NewRootNode()
+	root := binarytreenode.NewRootNode()
 	l := root.CreateChild("L")
 	ll := l.CreateChild("L")
 	ll.CreateChild("L")
