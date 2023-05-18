@@ -25,3 +25,10 @@ func (t *BinaryTree) IsEmpty() bool {
 func (t *BinaryTree) CreateNode(path string) {
 	t.root.CreateNodeAtSubPos(path)
 }
+
+// CreateLabelledNode creates a new node in the tree at the given path with the given label.
+// The path string is a sequence of characters 'L' or 'R', where each character represents a direction in the tree.
+// The path string is empty for the root node.
+func (t *BinaryTree) CreateLabelledNode(path, label string) {
+	t.root.CreateNodeAtSubPos(path).SetLabel(label)
+}
