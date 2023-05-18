@@ -72,3 +72,13 @@ func (n *Node) Label() string {
 func (n *Node) SetLabel(label string) {
 	n.label = label
 }
+
+// Name returns the name of the current node for drawing.
+// The name is the path string of the current node
+// or "root" if the current node is the root node.
+func (n *Node) Name() string {
+	if n.Path == "" {
+		return "root"
+	}
+	return n.Path
+}

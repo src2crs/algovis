@@ -137,3 +137,22 @@ func TestNode_Label_nonroot(t *testing.T) {
 		t.Errorf("l.Label() returned %s, but expected %s", l.Label(), "foo")
 	}
 }
+
+// TestNode_Name_root checks the name of a root node.
+// The name of a root node is "root".
+func TestNode_Name_root(t *testing.T) {
+	root := NewRootNode()
+	if root.Name() != "root" {
+		t.Errorf("root.Name() returned %s, but expected %s", root.Name(), "root")
+	}
+}
+
+// TestNode_Name_nonroot checks the name of a non-root node.
+// The name of a non-root node is the path string.
+func TestNode_Name_nonroot(t *testing.T) {
+	root := NewRootNode()
+	l := root.CreateChild("L")
+	if l.Name() != "L" {
+		t.Errorf("l.Name() returned %s, but expected %s", l.Name(), "L")
+	}
+}
