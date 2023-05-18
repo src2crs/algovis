@@ -30,15 +30,25 @@ func NewRootNode() *Node {
 // If the given direction is neither "L" nor "R", a panic occurs.
 // If a node already exists on the given side, it is overwritten.
 func (n *Node) CreateChild(direction string) *Node {
-	if direction == "L" {
-		n.Left = NewNode(n.Path + direction)
-		return n.Left
-	} else if direction == "R" {
-		n.Right = NewNode(n.Path + direction)
-		return n.Right
-	} else {
+	if direction != "L" && direction != "R" {
 		panic("Invalid direction")
 	}
+
+	result := NewNode(n.Path + direction)
+
+	switch direction {
+	case "L":
+		n.Left = result
+		if n.Right == nil {
+			n.Right = NewNode(n.Path + "R")
+		}
+	case "R":
+		n.Right = result
+		if n.Left == nil {
+			n.Left = NewNode(n.Path + "L")
+		}
+	}
+	return result
 }
 
 // CreateNodeAtSubPos creates a new node below the current node.
@@ -84,9 +94,9 @@ func (n *Node) GetChild(direction string) *Node {
 }
 
 // IsEmpty returns true if the current node is empty.
-// A node is empty if it has no children.
+// A node is empty if any of its children is nil.
 func (n *Node) IsEmpty() bool {
-	return n.Left == nil && n.Right == nil
+	return n.Left == nil || n.Right == nil
 }
 
 // Label returns the label of the current node for drawing.
