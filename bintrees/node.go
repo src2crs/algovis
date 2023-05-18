@@ -19,3 +19,21 @@ func NewNode(path string) *Node {
 func NewRootNode() *Node {
 	return NewNode("")
 }
+
+// CreateChild creates a new child node of the current node.
+// The new node is created on the left or right side of the current node, depending on the given direction.
+// The path string of the new node is the path string of the current node, with the given direction appended.
+// The new node is returned.
+// If the given direction is neither "L" nor "R", a panic occurs.
+// If a node already exists on the given side, it is overwritten.
+func (n *Node) CreateChild(direction string) *Node {
+	if direction == "L" {
+		n.Left = NewNode(n.Path + direction)
+		return n.Left
+	} else if direction == "R" {
+		n.Right = NewNode(n.Path + direction)
+		return n.Right
+	} else {
+		panic("Invalid direction")
+	}
+}
