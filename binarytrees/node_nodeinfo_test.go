@@ -69,3 +69,20 @@ func TestNode_NodeInfo_root_nonempty_label(t *testing.T) {
 		t.Errorf("root.NodeInfo() is %#v, but expected %#v", actualinfo, expectedinfo)
 	}
 }
+
+// TestNode_NodeInfo_nonroot_nonempty tests whether the NodeInfo() method
+// returns the correct NodeInfo for a nonempty non-root node without a label.
+func TestNode_NodeInfo_nonroot_nonempty_nolabel(t *testing.T) {
+	root := NewRootNode()
+	l := root.CreateChild("L")
+	l.CreateChild("L")
+	actualinfo := l.NodeInfo()
+	expectedinfo := graphdrawing.NodeInfo{
+		Name:    "L",
+		Label:   "L",
+		Visible: true,
+	}
+	if actualinfo != expectedinfo {
+		t.Errorf("root.Left.NodeInfo() is %#v, but expected %#v", actualinfo, expectedinfo)
+	}
+}
