@@ -1,4 +1,4 @@
-package bintrees
+package binarytrees
 
 // Node is a node in a binary tree.
 // Each node has a path string, which is used to identify the node's position in the tree.

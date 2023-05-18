@@ -1,4 +1,4 @@
-package bintrees
+package binarytrees
 
 import "testing"
 

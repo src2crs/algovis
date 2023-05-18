@@ -1,4 +1,4 @@
-package bintrees
+package binarytrees
 
 // EdgeInfo contains information for drawing an edge of a binary tree.
 type EdgeInfo struct {
