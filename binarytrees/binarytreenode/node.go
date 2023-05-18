@@ -1,6 +1,8 @@
 package binarytreenode
 
-import "github.com/src2crs/algovis/graphdrawing"
+import (
+	"github.com/src2crs/algovis/graphdrawing"
+)
 
 // Node is a node in a binary tree.
 // Each node has a path string, which is used to identify the node's position in the tree.
@@ -63,19 +65,11 @@ func (n *Node) CreateNodeAtSubPos(path string) *Node {
 		return n
 	}
 	nextdir, rest := path[:1], path[1:]
-	switch nextdir {
-	case "L":
-		if n.Left == nil {
-			n.CreateChild(nextdir)
-		}
+	n.CreateChild(nextdir)
+	if nextdir == "L" {
 		return n.Left.CreateNodeAtSubPos(rest)
-	case "R":
-		if n.Right == nil {
-			n.Right = NewNode(n.Path + nextdir)
-		}
+	} else {
 		return n.Right.CreateNodeAtSubPos(rest)
-	default:
-		panic("Invalid direction")
 	}
 }
 

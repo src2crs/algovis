@@ -18,3 +18,10 @@ func NewBinaryTree() *BinaryTree {
 func (t *BinaryTree) IsEmpty() bool {
 	return t.root.IsEmpty()
 }
+
+// CreateNode creates a new node in the tree at the given path.
+// The path string is a sequence of characters 'L' or 'R', where each character represents a direction in the tree.
+// The path string is empty for the root node.
+func (t *BinaryTree) CreateNode(path string) {
+	t.root.CreateNodeAtSubPos(path)
+}
