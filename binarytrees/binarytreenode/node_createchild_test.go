@@ -53,3 +53,33 @@ func TestNode_CreateChild_IsEmpty(t *testing.T) {
 		t.Errorf("CreateChild() did not make child node empty")
 	}
 }
+
+// TestNode_CreateNodeAtSubPos tests whether sub-nodes are created at the correct position.
+func TestNode_CreateNodeAtSubPos(t *testing.T) {
+	root := NewRootNode()
+	l := root.CreateNodeAtSubPos("L")
+	ll := root.CreateNodeAtSubPos("LL")
+	lr := root.CreateNodeAtSubPos("LR")
+	r := root.CreateNodeAtSubPos("R")
+	rl := root.CreateNodeAtSubPos("RL")
+	rr := root.CreateNodeAtSubPos("RR")
+
+	if l != root.Left {
+		t.Errorf("CreateNodeAtSubPos() did not create node at correct position")
+	}
+	if ll != root.Left.Left {
+		t.Errorf("CreateNodeAtSubPos() did not create node at correct position")
+	}
+	if lr != root.Left.Right {
+		t.Errorf("CreateNodeAtSubPos() did not create node at correct position")
+	}
+	if r != root.Right {
+		t.Errorf("CreateNodeAtSubPos() did not create node at correct position")
+	}
+	if rl != root.Right.Left {
+		t.Errorf("CreateNodeAtSubPos() did not create node at correct position")
+	}
+	if rr != root.Right.Right {
+		t.Errorf("CreateNodeAtSubPos() did not create node at correct position")
+	}
+}

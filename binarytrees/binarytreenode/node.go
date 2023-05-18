@@ -41,6 +41,34 @@ func (n *Node) CreateChild(direction string) *Node {
 	}
 }
 
+// CreateNodeAtSubPos creates a new node below the current node.
+// The new node is created at the given sub-position denoted by the given path string.
+// The path string of the new node is the path string of the current node, with the given sub-position appended.
+// The new node is returned.
+// Any non existing nodes on the path to the sub-position are created with empty labels.
+// If the given path string is empty, the current node is returned without changing it.
+// If the node at the given sub-position already exists, it is overwritten.
+func (n *Node) CreateNodeAtSubPos(path string) *Node {
+	if path == "" {
+		return n
+	}
+	nextdir, rest := path[:1], path[1:]
+	switch nextdir {
+	case "L":
+		if n.Left == nil {
+			n.Left = NewNode(n.Path + nextdir)
+		}
+		return n.Left.CreateNodeAtSubPos(rest)
+	case "R":
+		if n.Right == nil {
+			n.Right = NewNode(n.Path + nextdir)
+		}
+		return n.Right.CreateNodeAtSubPos(rest)
+	default:
+		panic("Invalid direction")
+	}
+}
+
 // GetChild returns the child node of the current node on the given side.
 // If no node exists on the given side, nil is returned.
 // If the given direction is neither "L" nor "R", a panic occurs.
