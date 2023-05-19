@@ -10,6 +10,16 @@ func TestBinaryTree_NewBinaryTree_IsEmpty(t *testing.T) {
 	}
 }
 
+// TestBinaryTree_NewBinaryTree_Root tests whether the Root() method of a newly created binary tree
+// returns the correct root node.
+func TestBinaryTree_NewBinaryTree_Root(t *testing.T) {
+	tree := NewBinaryTree()
+	root := tree.Root()
+	if root != tree.root {
+		t.Errorf("Root() returned %v, but expected %v", root, tree.root)
+	}
+}
+
 // TestBinaryTree_CreateNode_IsEmpty tests whether a binary tree is not empty after creating a node.
 func TestBinaryTree_CreateNode_IsEmpty(t *testing.T) {
 	tree := NewBinaryTree()

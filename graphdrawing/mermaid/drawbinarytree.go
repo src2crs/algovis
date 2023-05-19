@@ -3,11 +3,12 @@ package mermaid
 import (
 	"strings"
 
+	"github.com/src2crs/algovis/binarytrees"
 	"github.com/src2crs/algovis/binarytrees/binarytreenode"
 )
 
-// DrawBinaryTree returns the mermaid representation of a binary tree.
-func DrawBinaryTree(root *binarytreenode.Node) string {
+// DrawBinaryTreeNodes returns the mermaid representation of a binary tree.
+func DrawBinaryTreeNodes(root *binarytreenode.Node) string {
 	// Create a slice to store the node and edge strings
 	resultstrings := []string{"graph TD"}
 
@@ -26,4 +27,9 @@ func DrawBinaryTree(root *binarytreenode.Node) string {
 
 	// return the mermaid string.
 	return strings.Join(resultstrings, "\n  ")
+}
+
+// DrawBinaryTree returns the mermaid representation of a binary tree.
+func DrawBinaryTree(tree *binarytrees.BinaryTree) string {
+	return DrawBinaryTreeNodes(tree.Root())
 }

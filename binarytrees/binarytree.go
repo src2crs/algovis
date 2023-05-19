@@ -13,6 +13,11 @@ func NewBinaryTree() *BinaryTree {
 	return &BinaryTree{root: binarytreenode.NewRootNode()}
 }
 
+// Root returns the root node of the tree.
+func (t *BinaryTree) Root() *binarytreenode.Node {
+	return t.root
+}
+
 // IsEmpty returns true if the tree is empty.
 // A tree is empty if its root node is empty.
 func (t *BinaryTree) IsEmpty() bool {
