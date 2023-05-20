@@ -28,6 +28,16 @@ func (g *Graph) Edges() []graph.EdgeInfo {
 	return g.edges
 }
 
+// Size returns the number of nodes in the graph.
+func (g *Graph) Size() int {
+	return len(g.Nodes())
+}
+
+// IsEmpty returns true if the graph is empty.
+func (g *Graph) IsEmpty() bool {
+	return g.Size() == 0
+}
+
 // AddNode adds the given node to the graph.
 // If a node with the same id already exists, the function has no effect.
 // Returns the node as a graph.NodeInfo.

@@ -63,6 +63,22 @@ func TestGraph_AddNode_Duplicate(t *testing.T) {
 	}
 }
 
+// TestGraph_AddNode_Size_Empty tests the AddNode function.
+// It checks whether, after adding a node, the graph's size is 1 and Empty returns false.
+func TestGraph_AddNode_Size_Empty(t *testing.T) {
+	g := New()
+	node := basicnode.New("node1", "node 1", true)
+
+	g.AddNode(node)
+
+	if g.Size() != 1 {
+		t.Errorf("Expected graph's size to be 1, but was %v", g.Size())
+	}
+	if g.IsEmpty() {
+		t.Errorf("Expected graph to be not empty, but was empty")
+	}
+}
+
 // TestGraph_AddNodeWithId tests the AddNodeWithId function.
 // It checks whether, after adding a node, the graph contains the node.
 func TestGraph_AddNodeWithId(t *testing.T) {

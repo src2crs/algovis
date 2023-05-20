@@ -7,7 +7,7 @@ import "testing"
 func TestGraph_New_empty(t *testing.T) {
 	graph := New()
 
-	if len(graph.Nodes()) != 0 {
+	if !graph.IsEmpty() {
 		t.Errorf("Expected graph's nodes to be empty, but was %v", graph.Nodes())
 	}
 	if len(graph.Edges()) != 0 {
