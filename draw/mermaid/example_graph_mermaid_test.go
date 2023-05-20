@@ -48,3 +48,75 @@ func ExampleMermaid_one_node_invisible() {
 	//   b ~~~ c
 	//   c ~~~ a
 }
+
+// ExampleMermaid_binarytree_complete shows how to create a binary tree using a graph.
+// It also shows how to draw it using the Mermaid function.
+
+// The tree looks like this:
+//
+//	    root
+//	    /  \
+//	   L    R
+//	 / \   / \
+//	LL LR RL RR
+func ExampleMermaid_binarytree_complete() {
+	g := basicgraph.New()
+
+	g.AddEdgeBetweenIds("root", "L")
+	g.AddEdgeBetweenIds("root", "R")
+	g.AddEdgeBetweenIds("L", "LL")
+	g.AddEdgeBetweenIds("L", "LR")
+	g.AddEdgeBetweenIds("R", "RL")
+	g.AddEdgeBetweenIds("R", "RR")
+
+	fmt.Println(Mermaid(g))
+
+	// Output:
+	// graph TD
+	//   root[root]
+	//   L[L]
+	//   R[R]
+	//   LL[LL]
+	//   LR[LR]
+	//   RL[RL]
+	//   RR[RR]
+	//   root --- L
+	//   root --- R
+	//   L --- LL
+	//   L --- LR
+	//   R --- RL
+	//   R --- RR
+}
+
+// ExampleMermaid_binarytree_incomplete shows how to create an incomplete binary tree using a graph.
+// It also shows how to draw it using the Mermaid function.
+func ExampleMermaid_binarytree_incomplete() {
+	g := basicgraph.New()
+
+	g.AddEdgeBetweenIds("root", "L")
+	g.AddEdgeBetweenIds("root", "R")
+	g.AddInvisibleNodeWithId("LL")
+	g.AddEdgeBetweenIds("L", "LL")
+	g.AddEdgeBetweenIds("L", "LR")
+	g.AddInvisibleNodeWithId("RL")
+	g.AddEdgeBetweenIds("R", "RL")
+	g.AddEdgeBetweenIds("R", "RR")
+
+	fmt.Println(Mermaid(g))
+
+	// Output:
+	// graph TD
+	//   root[root]
+	//   L[L]
+	//   R[R]
+	//   LL[LL]:::hidden
+	//   LR[LR]
+	//   RL[RL]:::hidden
+	//   RR[RR]
+	//   root --- L
+	//   root --- R
+	//   L ~~~ LL
+	//   L --- LR
+	//   R ~~~ RL
+	//   R --- RR
+}
