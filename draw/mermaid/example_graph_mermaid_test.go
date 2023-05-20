@@ -6,9 +6,9 @@ import (
 	"github.com/src2crs/algovis/datastructures/graph/basicgraph"
 )
 
-// ExampleMermaid_all_nodes_visible shows how to create a graph where all nodes are visible
+// ExampleMermaid_graph_all_nodes_visible shows how to create a graph where all nodes are visible
 // and how to draw it using the Mermaid function.
-func ExampleMermaid_all_nodes_visible() {
+func ExampleMermaid_graph_all_nodes_visible() {
 	g := basicgraph.New()
 
 	g.AddEdgeBetweenIds("a", "b")
@@ -27,9 +27,9 @@ func ExampleMermaid_all_nodes_visible() {
 	//   c --- a
 }
 
-// ExampleMermaid_one_node_invisible shows how to create a graph where one node is invisible
+// ExampleMermaid_graph_one_node_invisible shows how to create a graph where one node is invisible
 // and how to draw it using the Mermaid function.
-func ExampleMermaid_one_node_invisible() {
+func ExampleMermaid_graph_one_node_invisible() {
 	g := basicgraph.New()
 
 	g.AddEdgeBetweenIds("a", "b")
@@ -49,7 +49,7 @@ func ExampleMermaid_one_node_invisible() {
 	//   c ~~~ a
 }
 
-// ExampleMermaid_binarytree_complete shows how to create a binary tree using a graph.
+// ExampleMermaid_binarytree_graph_complete shows how to create a binary tree using a graph.
 // It also shows how to draw it using the Mermaid function.
 
 // The tree looks like this:
@@ -59,7 +59,7 @@ func ExampleMermaid_one_node_invisible() {
 //	   L    R
 //	 / \   / \
 //	LL LR RL RR
-func ExampleMermaid_binarytree_complete() {
+func ExampleMermaid_binarytree_graph_complete() {
 	g := basicgraph.New()
 
 	g.AddEdgeBetweenIds("root", "L")
@@ -88,9 +88,9 @@ func ExampleMermaid_binarytree_complete() {
 	//   R --- RR
 }
 
-// ExampleMermaid_binarytree_incomplete shows how to create an incomplete binary tree using a graph.
+// ExampleMermaid_binarytree_graph_incomplete shows how to create an incomplete binary tree using a graph.
 // It also shows how to draw it using the Mermaid function.
-func ExampleMermaid_binarytree_incomplete() {
+func ExampleMermaid_binarytree_graph_incomplete() {
 	g := basicgraph.New()
 
 	g.AddEdgeBetweenIds("root", "L")
