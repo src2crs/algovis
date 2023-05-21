@@ -40,6 +40,38 @@ func ExampleMermaid_binarytree_complete() {
 	//   1 --- 1.1
 }
 
+// ExampleMermaid_binarytree_incomplete shows how to create an incomplete binary tree using
+// the tree.Tree data type.
+// It also shows how to draw it using the Mermaid function.
+func ExampleMermaid_binarytree_incomplete() {
+	// Create an incomplete binary tree of height 3
+	t := tree.New()
+
+	// Use the AddNodeAtPath function to add all the leaf nodes.
+	// The inner nodes will be added automatically.
+	t.AddNodeAtPath("0.0")
+	t.AddNodeAtPath("0.1")
+	// no node at "1.0", expect a hidden node here
+	t.AddNodeAtPath("1.1")
+
+	// Draw the tree
+	fmt.Println(Mermaid(t))
+
+	// Output:
+	// graph TD
+	//   root[root]
+	//   0[0]
+	//   0.0[0.0]
+	//   0.1[0.1]
+	//   1[1]
+	//   1.1[1.1]
+	//   root --- 0
+	//   0 --- 0.0
+	//   0 --- 0.1
+	//   root --- 1
+	//   1 --- 1.1
+}
+
 // ExampleMermaid_ternarytree_complete shows how to create an incomplete binary tree using
 // the tree.Tree data type.
 // It also shows how to draw it using the Mermaid function.
