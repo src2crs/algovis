@@ -1,11 +1,9 @@
 package tree
 
 import (
-	"fmt"
-	"strings"
-
 	"github.com/src2crs/algovis/datastructures/graph"
 	"github.com/src2crs/algovis/datastructures/graph/basicgraph"
+	"github.com/src2crs/algovis/datastructures/tree/path"
 )
 
 // Tree is a tree data structure.
@@ -25,49 +23,20 @@ func New() *Tree {
 
 // HasChildAtPos expects a path string and a single path segment as a string.
 // Returns true if the node with the given path exists and has a child at the given index.
-func (t *Tree) HasChildAtPos(path, index string) bool {
-	if path == "" {
-		path = "root"
-	}
-	node := t.GetNodeWithId(path)
-	if node == nil {
-		return false
-	}
-	if path == "root" {
-		return t.HasNodeWithId(index)
-	}
-	return t.HasNodeWithId(fmt.Sprintf("%s.%s", path, index))
-}
-
-// childPath expects a path string and a single path segment as a string.
-// Returns the path of the child node at the given index.
-// TODO: Provide a set of functions to properly check and handle invalid paths.
-func childPath(path, index string) string {
-	if path == "" || path == "root" {
-		return index
-	}
-	return fmt.Sprintf("%s.%s", path, index)
+func (t *Tree) HasChildAtPos(p, index string) bool {
+	return t.HasNodeWithId(path.Child(p, index))
 }
 
 // AddNodeAtPath adds a node at the given path.
 // All nodes and edges along the path are created if they don't exist.
 // Returns the node as a graph.NodeInfo.
 // If the target node already exists, the function has no effect and the existing node is returned.
-func (t *Tree) AddNodeAtPath(path string) graph.NodeInfo {
-	if path == "" || path == "root" {
-		return t.AddNodeWithId("root")
+func (t *Tree) AddNodeAtPath(p string) graph.NodeInfo {
+	p = path.NormalizeRoot(p)
+	for _, edge := range path.Edges(p) {
+		t.AddEdgeBetweenIds(edge.From, edge.To)
 	}
-
-	pathsegments := strings.Split(path, ".")
-	currentpath := "root"
-	for _, dir := range pathsegments {
-		nextpath := childPath(currentpath, dir)
-		if !t.HasNodeWithId(nextpath) {
-			t.AddEdgeBetweenIds(currentpath, nextpath)
-		}
-		currentpath = nextpath
-	}
-	return t.GetOrCreateNodeWithId(currentpath)
+	return t.GetOrCreateNodeWithId(p)
 }
 
 // AddEdgeBetweenIds adds an edge between the nodes at the given paths.
@@ -75,9 +44,7 @@ func (t *Tree) AddNodeAtPath(path string) graph.NodeInfo {
 // but it handles the case that the root node may be specified as "" or "root".
 // Furthermor, it will not create duplicate edges.
 func (t *Tree) AddEdgeBetweenIds(sourceid, targetid string) {
-	if sourceid == "" {
-		sourceid = "root"
-	}
+	sourceid = path.NormalizeRoot(sourceid)
 	if !t.HasNodeWithId(targetid) {
 		t.Graph.AddEdgeBetweenIds(sourceid, targetid)
 	}
