@@ -1,5 +1,7 @@
 package tree
 
+// This file contains the core implementation of the tree data structure.
+
 import (
 	"github.com/src2crs/algovis/datastructures/graph"
 	"github.com/src2crs/algovis/datastructures/graph/basicgraph"
@@ -13,7 +15,7 @@ import (
 // For the root node, the tree uses the special path string "root".
 // However, the root node can also be identified by the empty string "".
 type Tree struct {
-	*basicgraph.Graph
+	g *basicgraph.Graph
 }
 
 // New creates a new empty tree.
@@ -24,7 +26,7 @@ func New() *Tree {
 // HasChildAtPos expects a path string and a single path segment as a string.
 // Returns true if the node with the given path exists and has a child at the given index.
 func (t *Tree) HasChildAtPos(p, index string) bool {
-	return t.HasNodeWithId(path.Child(p, index))
+	return t.g.HasNodeWithId(path.Child(p, index))
 }
 
 // AddNodeAtPath adds a node at the given path.
@@ -36,7 +38,7 @@ func (t *Tree) AddNodeAtPath(p string) graph.NodeInfo {
 	for _, edge := range path.Edges(p) {
 		t.AddEdgeBetweenIds(edge.From, edge.To)
 	}
-	return t.GetOrCreateNodeWithId(p)
+	return t.g.GetOrCreateNodeWithId(p)
 }
 
 // AddEdgeBetweenIds adds an edge between the nodes at the given paths.
@@ -45,7 +47,7 @@ func (t *Tree) AddNodeAtPath(p string) graph.NodeInfo {
 // Furthermor, it will not create duplicate edges.
 func (t *Tree) AddEdgeBetweenIds(sourceid, targetid string) {
 	sourceid = path.NormalizeRoot(sourceid)
-	if !t.HasNodeWithId(targetid) {
-		t.Graph.AddEdgeBetweenIds(sourceid, targetid)
+	if !t.g.HasNodeWithId(targetid) {
+		t.g.AddEdgeBetweenIds(sourceid, targetid)
 	}
 }
