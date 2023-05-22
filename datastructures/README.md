@@ -23,3 +23,10 @@ The methods here also ensure that the requred edges are added to the graph.
 
 The package also contains a sub package `path` that provides functions to create
 and validate paths for trees.
+
+## TODO
+
+* Add a way to influence the layout by adding invisible nodes when drawing a tree with mermaid.
+  * A function or method `DrawTree` that takes a minimum number of children for each node,
+    filling them up with invisible nodes if necessary?
+  * Helper functions in `Tree` or `path` that list missing children for a node?
